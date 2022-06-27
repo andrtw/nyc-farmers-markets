@@ -19,3 +19,4 @@ rootProject.name = "nyc-farmers-markets"
 include(":app")
 include(":core-model")
 include(":core-network")
+include(":core-data")

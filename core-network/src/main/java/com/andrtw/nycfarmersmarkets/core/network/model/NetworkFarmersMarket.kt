@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class NetworkMarket(
+data class NetworkFarmersMarket(
     val borough: String?,
     @SerialName("marketname") val marketName: String?,
     @SerialName("streetaddress") val streetAddress: String?,
@@ -15,8 +15,8 @@ data class NetworkMarket(
     @SerialName("daysoperation") val daysOperation: String?,
     @SerialName("hoursoperations") val hoursOperations: String?,
     @SerialName("seasondates") val seasonDates: String?,
-    @Serializable(StringBooleanSerializer::class) val accepts_ebt: Boolean,
-    @Serializable(StringBooleanSerializer::class) val open_year_round: Boolean,
-    @Serializable(StringBooleanSerializer::class) val nyc_dept_of_health_cooking: Boolean,
+    @SerialName("accepts_ebt") @Serializable(StringBooleanSerializer::class) val acceptsEbt: Boolean,
+    @SerialName("open_year_round") @Serializable(StringBooleanSerializer::class) val openYearRound: Boolean,
+    @SerialName("nyc_dept_of_health_cooking") @Serializable(StringBooleanSerializer::class) val nycDeptOfHealthCooking: Boolean,
     @Serializable(StringBooleanSerializer::class) val kids: Boolean,
 )
