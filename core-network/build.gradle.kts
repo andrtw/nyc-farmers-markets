@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = Config.compileSdk
 
     defaultConfig {
-        minSdk = 21
-        targetSdk = 32
+        minSdk = Config.minSdk
+        targetSdk = Config.targetSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -39,16 +39,16 @@ android {
 }
 
 dependencies {
-    implementation("com.google.dagger:hilt-android:2.42")
-    kapt("com.google.dagger:hilt-compiler:2.42")
+    implementation(Deps.hiltAndroid)
+    kapt(Deps.hiltCompiler)
 
-    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation(Deps.okhttp)
 
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
+    implementation(Deps.retrofit)
+    implementation(Deps.retrofitKotlinxSerializationConverter)
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
+    implementation(Deps.kotlinxSerializationJson)
 
-    testImplementation("com.google.truth:truth:1.1.3")
-    testImplementation("junit:junit:4.13.2")
+    testImplementation(Deps.googleTruth)
+    testImplementation(Deps.junit4)
 }

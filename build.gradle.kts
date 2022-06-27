@@ -1,13 +1,14 @@
 buildscript {
-    dependencies {
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.42")
+    repositories {
+        google()
+        mavenCentral()
     }
-}
 
-plugins {
-    id("com.android.application") version "7.2.1" apply false
-    id("com.android.library") version "7.2.1" apply false
-    id("org.jetbrains.kotlin.android") version "1.6.21" apply false
+    dependencies {
+        classpath(BuildPlugins.android)
+        classpath(BuildPlugins.kotlin)
+        classpath(BuildPlugins.hilt)
+    }
 }
 
 tasks.create<Delete>("clean") {

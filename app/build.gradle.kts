@@ -6,14 +6,14 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = Config.compileSdk
 
     defaultConfig {
         applicationId = "com.andrtw.nycfarmersmarkets"
-        minSdk = 21
-        targetSdk = 32
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = Config.minSdk
+        targetSdk = Config.targetSdk
+        versionCode = Config.versionCode
+        versionName = Config.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -41,7 +41,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.2.0-rc02"
+        kotlinCompilerExtensionVersion = Versions.androidxCompose
     }
     packagingOptions {
         resources {
@@ -51,20 +51,19 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.8.0")
-    implementation("androidx.compose.ui:ui:1.2.0-rc02")
-    implementation("androidx.compose.material3:material3:1.0.0-alpha13")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.2.0-rc02")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
-    implementation("androidx.activity:activity-compose:1.4.0")
+    implementation(Deps.androidxCoreKtx)
+    implementation(Deps.androidxComposeUi)
+    implementation(Deps.androidxComposeMaterial3)
+    implementation(Deps.androidxComposeUiToolingPreview)
+    implementation(Deps.androidxActivityCompose)
 
-    implementation("com.google.dagger:hilt-android:2.42")
-    kapt("com.google.dagger:hilt-compiler:2.42")
+    implementation(Deps.hiltAndroid)
+    kapt(Deps.hiltCompiler)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.2.0-rc02")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.2.0-rc02")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:1.2.0-rc02")
+    testImplementation(Deps.junit4)
+    androidTestImplementation(Deps.androidxTestExtJunit)
+    androidTestImplementation(Deps.androidxTestEspressoCore)
+    androidTestImplementation(Deps.androidxComposeUiTest)
+    debugImplementation(Deps.androidxComposeUiTooling)
+    debugImplementation(Deps.androidxComposeUiTestManifest)
 }
