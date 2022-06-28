@@ -3,7 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
-    id("kotlinx-serialization")
 }
 
 android {
@@ -15,6 +14,16 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += mapOf(
+                    "room.schemaLocation" to "$projectDir/schemas",
+                    "room.incremental" to "true",
+                    "room.expandProjection" to "true"
+                )
+            }
+        }
     }
 
     buildTypes {
@@ -42,13 +51,20 @@ dependencies {
     implementation(Deps.hiltAndroid)
     kapt(Deps.hiltCompiler)
 
-    implementation(Deps.okhttp)
+    implementation(Deps.roomRuntime)
+    implementation(Deps.roomKtx)
+    kapt(Deps.roomCompiler)
 
-    implementation(Deps.retrofit)
-    implementation(Deps.retrofitKotlinxSerializationConverter)
+    implementation(Deps.kotlinxCoroutinesAndroid)
 
-    implementation(Deps.kotlinxSerializationJson)
+    androidTestImplementation(Deps.googleTruth)
+    androidTestImplementation(Deps.junit4)
 
-    testImplementation(Deps.googleTruth)
-    testImplementation(Deps.junit4)
+    androidTestImplementation(Deps.kotlinxCoroutinesTest)
+    androidTestImplementation(Deps.hiltAndroidTesting)
+    androidTestImplementation(Deps.androidxTestCore)
+    androidTestImplementation(Deps.androidxTestExt)
+    androidTestImplementation(Deps.androidxTestEspressoCore)
+    androidTestImplementation(Deps.androidxTestRunner)
+    androidTestImplementation(Deps.androidxTestRules)
 }

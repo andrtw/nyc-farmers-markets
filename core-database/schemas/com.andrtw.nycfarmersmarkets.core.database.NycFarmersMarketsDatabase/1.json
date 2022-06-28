@@ -1,0 +1,106 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "b91a000dae378c4bd3d2640aeb462b8f",
+    "entities": [
+      {
+        "tableName": "farmers_markets",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`marketName` TEXT NOT NULL, `borough` TEXT, `streetAddress` TEXT, `communityDistrict` TEXT, `latitude` TEXT, `longitude` TEXT, `daysOperation` TEXT, `hoursOperations` TEXT, `seasonDates` TEXT, `acceptsEbt` INTEGER NOT NULL, `openYearRound` INTEGER NOT NULL, `nycDeptOfHealthCooking` INTEGER NOT NULL, `kids` INTEGER NOT NULL, PRIMARY KEY(`marketName`))",
+        "fields": [
+          {
+            "fieldPath": "marketName",
+            "columnName": "marketName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "borough",
+            "columnName": "borough",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "streetAddress",
+            "columnName": "streetAddress",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "communityDistrict",
+            "columnName": "communityDistrict",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "latitude",
+            "columnName": "latitude",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "longitude",
+            "columnName": "longitude",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "daysOperation",
+            "columnName": "daysOperation",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "hoursOperations",
+            "columnName": "hoursOperations",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "seasonDates",
+            "columnName": "seasonDates",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "acceptsEbt",
+            "columnName": "acceptsEbt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "openYearRound",
+            "columnName": "openYearRound",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nycDeptOfHealthCooking",
+            "columnName": "nycDeptOfHealthCooking",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "kids",
+            "columnName": "kids",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "marketName"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b91a000dae378c4bd3d2640aeb462b8f')"
+    ]
+  }
+}

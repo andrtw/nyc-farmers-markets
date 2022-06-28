@@ -5,9 +5,10 @@ buildscript {
     }
 
     dependencies {
-        classpath(BuildPlugins.android)
-        classpath(BuildPlugins.kotlin)
-        classpath(BuildPlugins.hilt)
+        classpath(GradlePlugins.android)
+        classpath(GradlePlugins.kotlin)
+        classpath(GradlePlugins.kotlinSerialization)
+        classpath(GradlePlugins.hilt)
     }
 }
 
