@@ -31,15 +31,23 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs = freeCompilerArgs + listOf(
+            "-opt-in=kotlin.RequiresOptIn",
+        )
     }
 }
 
 dependencies {
     implementation(project(":core-network"))
     implementation(project(":core-model"))
+    implementation(project(":core-database"))
 
     implementation(Deps.hiltAndroid)
     kapt(Deps.hiltCompiler)
 
+    implementation(Deps.kotlinxCoroutinesAndroid)
+
     testImplementation(Deps.junit4)
+    testImplementation(Deps.googleTruth)
+    testImplementation(Deps.kotlinxCoroutinesTest)
 }

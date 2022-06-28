@@ -1,10 +1,10 @@
-package com.andrtw.nycfarmersmarkets.core.data.repository
+package com.andrtw.nycfarmersmarkets.core.data.source
 
 import com.andrtw.nycfarmersmarkets.core.model.FarmersMarket
 import kotlinx.coroutines.flow.Flow
 
-interface FarmersMarketsRepository {
+interface FarmersMarketsLocalDataSource {
     suspend fun getFarmersMarkets(): Flow<List<FarmersMarket>>
 
-    suspend fun updateFarmersMarkets()
+    suspend fun insertFarmersMarkets(markets: List<FarmersMarket>)
 }

@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class NetworkFarmersMarket(
     val borough: String?,
-    @SerialName("marketname") val marketName: String?,
+    @SerialName("marketname") val marketName: String,
     @SerialName("streetaddress") val streetAddress: String?,
     @SerialName("community_district") val communityDistrict: String?,
     val latitude: String?,

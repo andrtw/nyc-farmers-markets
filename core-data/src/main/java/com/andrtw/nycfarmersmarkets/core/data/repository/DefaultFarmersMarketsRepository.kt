@@ -1,14 +1,22 @@
 package com.andrtw.nycfarmersmarkets.core.data.repository
 
+import com.andrtw.nycfarmersmarkets.core.data.source.FarmersMarketsLocalDataSource
 import com.andrtw.nycfarmersmarkets.core.data.source.FarmersMarketsRemoteDataSource
 import com.andrtw.nycfarmersmarkets.core.model.FarmersMarket
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class DefaultFarmersMarketsRepository @Inject constructor(
     private val remoteDataSource: FarmersMarketsRemoteDataSource,
+    private val localDataSource: FarmersMarketsLocalDataSource,
 ) : FarmersMarketsRepository {
 
-    override suspend fun getFarmersMarkets(): List<FarmersMarket> {
-        return remoteDataSource.getFarmersMarkets()
+    override suspend fun getFarmersMarkets(): Flow<List<FarmersMarket>> {
+        return localDataSource.getFarmersMarkets()
+    }
+
+    override suspend fun updateFarmersMarkets() {
+        val markets = remoteDataSource.getFarmersMarkets()
+        localDataSource.insertFarmersMarkets(markets)
     }
 }

@@ -1,8 +1,8 @@
 package com.andrtw.nycfarmersmarkets.core.model
 
 data class FarmersMarket(
+    val marketName: String,
     val borough: String?,
-    val marketName: String?,
     val streetAddress: String?,
     val communityDistrict: String?,
     val latitude: String?,
