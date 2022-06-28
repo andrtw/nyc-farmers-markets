@@ -13,16 +13,19 @@ object StringBooleanSerializer : KSerializer<Boolean> {
     )
 
     override fun deserialize(decoder: Decoder): Boolean {
-        return decoder.decodeString().toBoolean()
+        return when (decoder.decodeString().lowercase()) {
+            "yes" -> true
+            "no" -> false
+            else -> false
+        }
     }
 
     override fun serialize(encoder: Encoder, value: Boolean) {
-        encoder.encodeBoolean(value)
-    }
-
-    private fun String?.toBoolean() = when (this?.lowercase()) {
-        "yes" -> true
-        "no" -> false
-        else -> false
+        encoder.encodeString(
+            when (value) {
+                true -> "Yes"
+                false -> "No"
+            }
+        )
     }
 }
