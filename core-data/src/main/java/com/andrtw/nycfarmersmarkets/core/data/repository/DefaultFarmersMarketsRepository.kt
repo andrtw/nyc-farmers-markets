@@ -11,7 +11,7 @@ class DefaultFarmersMarketsRepository @Inject constructor(
     private val localDataSource: FarmersMarketsLocalDataSource,
 ) : FarmersMarketsRepository {
 
-    override suspend fun getFarmersMarkets(): Flow<List<FarmersMarket>> {
+    override fun getFarmersMarkets(): Flow<List<FarmersMarket>> {
         return localDataSource.getFarmersMarkets()
     }
 

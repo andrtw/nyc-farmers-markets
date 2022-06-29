@@ -13,7 +13,7 @@ class DefaultFarmersMarketLocalDataSource @Inject constructor(
     private val dao: FarmersMarketsDao,
 ) : FarmersMarketsLocalDataSource {
 
-    override suspend fun getFarmersMarkets(): Flow<List<FarmersMarket>> {
+    override fun getFarmersMarkets(): Flow<List<FarmersMarket>> {
         return dao.getFarmersMarketsStream().map { it.map(FarmersMarketEntity::toDomainModel) }
     }
 
