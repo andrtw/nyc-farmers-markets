@@ -11,6 +11,6 @@ class DefaultFarmersMarketsRemoteDataSource @Inject constructor(
 ) : FarmersMarketsRemoteDataSource {
 
     override suspend fun getFarmersMarkets(): List<FarmersMarket> {
-        return api.getMarkets().map(NetworkFarmersMarket::toDomainModel)
+        return api.getMarkets().mapNotNull(NetworkFarmersMarket::toDomainModel)
     }
 }

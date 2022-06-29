@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b91a000dae378c4bd3d2640aeb462b8f",
+    "identityHash": "b313fbbefb2fce3b086e8448dad5c636",
     "entities": [
       {
         "tableName": "farmers_markets",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`marketName` TEXT NOT NULL, `borough` TEXT, `streetAddress` TEXT, `communityDistrict` TEXT, `latitude` TEXT, `longitude` TEXT, `daysOperation` TEXT, `hoursOperations` TEXT, `seasonDates` TEXT, `acceptsEbt` INTEGER NOT NULL, `openYearRound` INTEGER NOT NULL, `nycDeptOfHealthCooking` INTEGER NOT NULL, `kids` INTEGER NOT NULL, PRIMARY KEY(`marketName`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`marketName` TEXT NOT NULL, `borough` TEXT, `streetAddress` TEXT, `communityDistrict` TEXT, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `daysOperation` TEXT, `hoursOperations` TEXT, `seasonDates` TEXT, `acceptsEbt` INTEGER NOT NULL, `openYearRound` INTEGER NOT NULL, `nycDeptOfHealthCooking` INTEGER NOT NULL, `kids` INTEGER NOT NULL, PRIMARY KEY(`marketName`))",
         "fields": [
           {
             "fieldPath": "marketName",
@@ -35,14 +35,14 @@
           {
             "fieldPath": "latitude",
             "columnName": "latitude",
-            "affinity": "TEXT",
-            "notNull": false
+            "affinity": "REAL",
+            "notNull": true
           },
           {
             "fieldPath": "longitude",
             "columnName": "longitude",
-            "affinity": "TEXT",
-            "notNull": false
+            "affinity": "REAL",
+            "notNull": true
           },
           {
             "fieldPath": "daysOperation",
@@ -100,7 +100,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b91a000dae378c4bd3d2640aeb462b8f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b313fbbefb2fce3b086e8448dad5c636')"
     ]
   }
 }
