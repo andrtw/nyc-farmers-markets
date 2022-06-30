@@ -9,7 +9,7 @@ class FakeFarmersMarketsLocalDataSource : FarmersMarketsLocalDataSource {
 
     private val storage = mutableListOf(*localMarkets.toTypedArray())
 
-    override suspend fun getFarmersMarkets(): Flow<List<FarmersMarket>> = flow {
+    override fun getFarmersMarkets(): Flow<List<FarmersMarket>> = flow {
         emit(storage)
     }
 

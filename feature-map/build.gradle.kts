@@ -32,19 +32,37 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = Versions.androidxCompose
+    }
 }
 
 dependencies {
-    implementation(project(":core-network"))
     implementation(project(":core-model"))
-    implementation(project(":core-database"))
+    implementation(project(":core-data"))
 
     implementation(Deps.hiltAndroid)
     kapt(Deps.hiltCompiler)
 
-    implementation(Deps.kotlinxCoroutinesAndroid)
+    implementation(Deps.androidxCoreKtx)
+    implementation(Deps.androidxComposeUi)
+    implementation(Deps.androidxComposeMaterial3)
+    implementation(Deps.androidxComposeUiToolingPreview)
+    implementation(Deps.androidxLifecycleViewModelCompose)
+    implementation(Deps.androidxHiltNavigationCompose)
+
+    implementation(Deps.mapsCompose)
+    implementation(Deps.gmsPlayServicesMaps)
 
     testImplementation(Deps.junit4)
     testImplementation(Deps.googleTruth)
     testImplementation(Deps.kotlinxCoroutinesTest)
+    androidTestImplementation(Deps.androidxTestExt)
+    androidTestImplementation(Deps.androidxTestEspressoCore)
+    androidTestImplementation(Deps.androidxComposeUiTest)
+    debugImplementation(Deps.androidxComposeUiTooling)
+    debugImplementation(Deps.androidxComposeUiTestManifest)
 }

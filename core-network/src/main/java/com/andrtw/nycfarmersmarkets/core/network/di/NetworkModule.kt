@@ -13,7 +13,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
-@OptIn(ExperimentalSerializationApi::class)
+@ExperimentalSerializationApi
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
