@@ -32,6 +32,9 @@ object Deps {
     const val kotlinxCoroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${v.kotlinxCoroutines}"
     const val kotlinxCoroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${v.kotlinxCoroutines}"
 
+    const val mapsCompose = "com.google.maps.android:maps-compose:${v.mapsCompose}"
+    const val gmsPlayServicesMaps = "com.google.android.gms:play-services-maps:${v.gmsPlayServicesMaps}"
+
     const val junit4 = "junit:junit:${v.junit4}"
     const val googleTruth = "com.google.truth:truth:${v.googleTruth}"
 }

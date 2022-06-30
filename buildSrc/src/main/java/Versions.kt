@@ -1,5 +1,6 @@
 object Versions {
     const val androidGradlePlugin = "7.2.1"
+    const val secretsGradlePlugin = "2.0.1"
     const val kotlin = "1.6.21"
     const val androidxCore = "1.8.0"
     const val androidxCompose = "1.2.0-rc02"
@@ -19,6 +20,9 @@ object Versions {
 
     const val kotlinxSerializationJson = "1.3.3"
     const val kotlinxCoroutines = "1.6.3"
+
+    const val mapsCompose = "2.2.1"
+    const val gmsPlayServicesMaps = "18.0.2"
 
     const val junit4 = "4.13.2"
     const val googleTruth = "1.1.3"

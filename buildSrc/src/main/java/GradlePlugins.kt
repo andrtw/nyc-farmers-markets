@@ -5,4 +5,5 @@ object GradlePlugins {
     const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${v.kotlin}"
     const val kotlinSerialization = "org.jetbrains.kotlin:kotlin-serialization:${v.kotlin}"
     const val hilt = "com.google.dagger:hilt-android-gradle-plugin:${v.hilt}"
+    const val secrets = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:${v.secretsGradlePlugin}"
 }

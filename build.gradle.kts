@@ -9,6 +9,7 @@ buildscript {
         classpath(GradlePlugins.kotlin)
         classpath(GradlePlugins.kotlinSerialization)
         classpath(GradlePlugins.hilt)
+        classpath(GradlePlugins.secrets)
     }
 }
 
