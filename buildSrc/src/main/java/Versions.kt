@@ -23,7 +23,7 @@ object Versions {
     const val kotlinxSerializationJson = "1.3.3"
     const val kotlinxCoroutines = "1.6.3"
 
-    const val mapsCompose = "2.2.1"
+    const val mapsCompose = "2.5.0"
     const val gmsPlayServicesMaps = "18.0.2"
 
     const val junit4 = "4.13.2"
