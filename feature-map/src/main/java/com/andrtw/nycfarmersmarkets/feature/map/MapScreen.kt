@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -18,6 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.andrtw.nycfarmersmarkets.feature.map.model.MapScreenUiState
@@ -25,8 +27,9 @@ import com.andrtw.nycfarmersmarkets.feature.map.model.UiFarmersMarket
 import com.andrtw.nycfarmersmarkets.feature.map.util.TestTags
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.compose.GoogleMap
-import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MarkerInfoWindowContent
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
 
@@ -35,14 +38,14 @@ import com.google.maps.android.compose.rememberCameraPositionState
 fun MapScreen(
     viewModel: MapViewModel = hiltViewModel(),
     snackbarHostState: SnackbarHostState,
-    onPinClick: (String) -> Unit,
+    onPinInfoClick: (String) -> Unit,
 ) {
     val state by viewModel.uiState.collectAsState()
 
     MapScreen(
         state = state,
         snackbarHostState = snackbarHostState,
-        onPinClick = { onPinClick(it.marketName) },
+        onPinInfoClick = { onPinInfoClick(it.marketName) },
         onRefreshMarketsClick = viewModel::refreshFarmersMarkets,
         onErrorShown = viewModel::errorMessageShown
     )
@@ -53,7 +56,7 @@ fun MapScreen(
 fun MapScreen(
     state: MapScreenUiState,
     snackbarHostState: SnackbarHostState,
-    onPinClick: (UiFarmersMarket) -> Unit,
+    onPinInfoClick: (UiFarmersMarket) -> Unit,
     onRefreshMarketsClick: () -> Unit,
     onErrorShown: () -> Unit,
 ) {
@@ -70,7 +73,7 @@ fun MapScreen(
         Box {
             GoogleMap(
                 pins = state.pins,
-                onPinClick = onPinClick,
+                onPinInfoClick = onPinInfoClick,
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(padding),
@@ -133,7 +136,7 @@ fun RefreshButton(
 fun GoogleMap(
     modifier: Modifier = Modifier,
     pins: List<UiFarmersMarket>,
-    onPinClick: (UiFarmersMarket) -> Unit,
+    onPinInfoClick: (UiFarmersMarket) -> Unit,
 ) {
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(NEW_YORK, ZOOM_LEVEL)
@@ -145,16 +148,44 @@ fun GoogleMap(
     ) {
         for (pin in pins) {
             val position = LatLng(pin.latitude, pin.longitude)
-            Marker(
+            MarkerInfoWindowContent(
                 state = MarkerState(position),
                 title = pin.marketName,
                 snippet = pin.streetAddress,
-                onClick = {
-                    onPinClick(pin)
-                    false
-                }
-            )
+                onInfoWindowClick = { onPinInfoClick(pin) },
+            ) { marker ->
+                InfoWindowContent(marker = marker)
+            }
         }
+    }
+}
+
+@Composable
+fun InfoWindowContent(
+    marker: Marker,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            marker.title?.let {
+                Text(
+                    it,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            marker.snippet?.let {
+                Text(it, style = MaterialTheme.typography.bodySmall)
+            }
+        }
+        Spacer(modifier = Modifier.width(8.dp))
+        Icon(
+            Icons.Default.Info,
+            contentDescription = stringResource(id = R.string.market_info_content_description),
+        )
     }
 }
 
