@@ -148,10 +148,10 @@ fun GoogleMap(
             Marker(
                 state = MarkerState(position),
                 title = pin.marketName,
-                snippet = pin.marketName,
+                snippet = pin.streetAddress,
                 onClick = {
                     onPinClick(pin)
-                    true
+                    false
                 }
             )
         }
