@@ -2,6 +2,7 @@ package com.andrtw.nycfarmersmarkets.feature.map
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -106,7 +107,8 @@ fun RefreshButton(
                 color = Color.Black.copy(alpha = 0.1f)
             )
             .clip(shape)
-            .background(Color.White.copy(alpha = 0.75f)),
+            .background(Color.White.copy(alpha = 0.75f))
+            .clickable(enabled = !isLoading, onClick = onClick),
         contentAlignment = Alignment.Center,
     ) {
         if (isLoading) {
@@ -117,14 +119,12 @@ fun RefreshButton(
                 strokeWidth = 2.dp,
             )
         } else {
-            IconButton(onClick = onClick) {
-                Icon(
-                    Icons.Default.Refresh,
-                    contentDescription = stringResource(id = R.string.refresh_content_description),
-                    tint = Color.Black.copy(alpha = 0.5f),
-                    modifier = Modifier.size(28.dp)
-                )
-            }
+            Icon(
+                Icons.Default.Refresh,
+                contentDescription = stringResource(id = R.string.refresh_content_description),
+                tint = Color.Black.copy(alpha = 0.5f),
+                modifier = Modifier.size(28.dp)
+            )
         }
     }
 }
@@ -138,6 +138,7 @@ fun GoogleMap(
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(NEW_YORK, ZOOM_LEVEL)
     }
+
     GoogleMap(
         modifier = modifier.fillMaxSize(),
         cameraPositionState = cameraPositionState,
