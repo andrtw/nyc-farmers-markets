@@ -11,7 +11,7 @@ interface FarmersMarketsDao {
     fun getFarmersMarketsStream(): Flow<List<FarmersMarketEntity>>
 
     @Query("SELECT * FROM farmers_markets WHERE marketName = :name")
-    fun getFarmersMarketByNameStream(name: String): Flow<FarmersMarketEntity>
+    fun getFarmersMarketByNameStream(name: String): Flow<FarmersMarketEntity?>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertOrIgnoreFarmersMarkets(markets: List<FarmersMarketEntity>): List<Long>

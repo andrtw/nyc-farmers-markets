@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_unknown_market">Could not find this farmers market</string>
+    <string name="available_content_description">Available</string>
+    <string name="not_available_content_description">Not available</string>
+    <string name="market_feature_accepts_ebt">Accepts EBT</string>
+    <string name="market_feature_open_year_round">Open year round</string>
+    <string name="market_feature_nyc_dept_of_health_cooking">Offers a nutrition workshop onsite</string>
+    <string name="market_feature_kids">Food activities for kids</string>
+    <string name="google_maps_button">Get me there</string>
+</resources>

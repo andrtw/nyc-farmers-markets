@@ -6,6 +6,7 @@ object Deps {
     const val androidxLifecycleViewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:${v.androidxLifecycle}"
     const val androidxComposeUi = "androidx.compose.ui:ui:${v.androidxCompose}"
     const val androidxComposeRuntime = "androidx.compose.runtime:runtime:${v.androidxCompose}"
+    const val androidxComposeMaterialIconsExtended = "androidx.compose.material:material-icons-extended:${v.androidxCompose}"
     const val androidxComposeMaterial3 = "androidx.compose.material3:material3:${v.androidxComposeMaterial3}"
     const val androidxComposeUiTooling = "androidx.compose.ui:ui-tooling:${v.androidxCompose}"
     const val androidxComposeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview:${v.androidxCompose}"
