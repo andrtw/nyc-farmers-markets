@@ -26,6 +26,26 @@ class FarmersMarketsDaoTest {
     }
 
     @Test
+    fun farmersMarketsDao_returns_market_by_name() = runTest {
+        val marketEntity = fakeFarmersMarket(name = "Test Market")
+        dao.upsertFarmersMarkets(listOf(marketEntity))
+
+        assertThat(
+            dao.getFarmersMarketByNameStream("Test Market").first()
+        ).isEqualTo(
+            marketEntity
+        )
+    }
+
+    @Test
+    fun farmersMarketsDao_returns_null_for_non_existent_market() = runTest {
+        val marketEntity = fakeFarmersMarket(name = "Test Market")
+        dao.upsertFarmersMarkets(listOf(marketEntity))
+
+        assertThat(dao.getFarmersMarketByNameStream("Android Market").first()).isNull()
+    }
+
+    @Test
     fun farmersMarketsDao_inserts_market() = runTest {
         val marketEntity = fakeFarmersMarket()
         dao.upsertFarmersMarkets(listOf(marketEntity))

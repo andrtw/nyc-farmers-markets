@@ -1,9 +1,6 @@
 package com.andrtw.nycfarmersmarkets.core.data.repository
 
-import com.andrtw.nycfarmersmarkets.core.data.fake.FakeFarmersMarketsLocalDataSource
-import com.andrtw.nycfarmersmarkets.core.data.fake.FakeFarmersMarketsRemoteDataSource
-import com.andrtw.nycfarmersmarkets.core.data.fake.localMarkets
-import com.andrtw.nycfarmersmarkets.core.data.fake.remoteMarkets
+import com.andrtw.nycfarmersmarkets.core.data.fake.*
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
@@ -31,9 +28,15 @@ class FarmersMarketsRepositoryTest {
     }
 
     @Test
+    fun `farmersMarketsRepository return market by name`() = runTest {
+        val market = repository.getFarmersMarketByName("Local Market 1").first()
+        assertThat(market).isEqualTo(localFarmersMarket1)
+    }
+
+    @Test
     fun `farmersMarketsRepository inserts new markets`() = runTest {
         repository.updateFarmersMarkets()
         val markets = repository.getFarmersMarkets().first()
-        assertThat(markets).isEqualTo(localMarkets + remoteMarkets)
+        assertThat(markets).isEqualTo(allMarkets)
     }
 }

@@ -17,6 +17,10 @@ class DefaultFarmersMarketLocalDataSource @Inject constructor(
         return dao.getFarmersMarketsStream().map { it.map(FarmersMarketEntity::toDomainModel) }
     }
 
+    override fun getFarmersMarketByName(name: String): Flow<FarmersMarket?> {
+        return dao.getFarmersMarketByNameStream(name).map(FarmersMarketEntity::toDomainModel)
+    }
+
     override suspend fun insertFarmersMarkets(markets: List<FarmersMarket>) {
         dao.upsertFarmersMarkets(markets.map(FarmersMarket::toEntityModel))
     }

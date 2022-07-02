@@ -4,6 +4,7 @@ import com.andrtw.nycfarmersmarkets.core.data.repository.FarmersMarketsRepositor
 import com.andrtw.nycfarmersmarkets.core.model.FarmersMarket
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.update
 
 class FakeFarmersMarketsRepository : FarmersMarketsRepository {
@@ -20,6 +21,10 @@ class FakeFarmersMarketsRepository : FarmersMarketsRepository {
     )
 
     override fun getFarmersMarkets(): Flow<List<FarmersMarket>> = markets
+
+    override fun getFarmersMarketByName(name: String): Flow<FarmersMarket?> = flow {
+        emit(markets.value.find { it.marketName == name })
+    }
 
     override suspend fun updateFarmersMarkets() {
         if (failUpdate) {

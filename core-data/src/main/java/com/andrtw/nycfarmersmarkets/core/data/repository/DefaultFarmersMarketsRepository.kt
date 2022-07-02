@@ -15,6 +15,10 @@ class DefaultFarmersMarketsRepository @Inject constructor(
         return localDataSource.getFarmersMarkets()
     }
 
+    override fun getFarmersMarketByName(name: String): Flow<FarmersMarket?> {
+        return localDataSource.getFarmersMarketByName(name)
+    }
+
     override suspend fun updateFarmersMarkets() {
         val markets = remoteDataSource.getFarmersMarkets()
         localDataSource.insertFarmersMarkets(markets)

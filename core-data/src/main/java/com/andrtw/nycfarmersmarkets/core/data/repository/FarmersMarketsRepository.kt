@@ -6,5 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface FarmersMarketsRepository {
     fun getFarmersMarkets(): Flow<List<FarmersMarket>>
 
+    fun getFarmersMarketByName(name: String): Flow<FarmersMarket?>
+
     suspend fun updateFarmersMarkets()
 }
