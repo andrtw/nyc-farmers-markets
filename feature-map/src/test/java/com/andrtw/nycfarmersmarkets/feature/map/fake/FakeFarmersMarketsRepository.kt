@@ -2,6 +2,7 @@ package com.andrtw.nycfarmersmarkets.feature.map.fake
 
 import com.andrtw.nycfarmersmarkets.core.data.repository.FarmersMarketsRepository
 import com.andrtw.nycfarmersmarkets.core.model.FarmersMarket
+import com.andrtw.nycfarmersmarkets.core.testing.fake.fakeFarmersMarket
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow

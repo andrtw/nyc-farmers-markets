@@ -38,13 +38,10 @@ dependencies {
     implementation(project(":core-network"))
     implementation(project(":core-model"))
     implementation(project(":core-database"))
+    testImplementation(project(":core-testing"))
 
     implementation(Deps.hiltAndroid)
     kapt(Deps.hiltCompiler)
 
     implementation(Deps.kotlinxCoroutinesAndroid)
-
-    testImplementation(Deps.junit4)
-    testImplementation(Deps.googleTruth)
-    testImplementation(Deps.kotlinxCoroutinesTest)
 }

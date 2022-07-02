@@ -1,4 +1,4 @@
-package com.andrtw.nycfarmersmarkets.feature.map.util
+package com.andrtw.nycfarmersmarkets.core.testing
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

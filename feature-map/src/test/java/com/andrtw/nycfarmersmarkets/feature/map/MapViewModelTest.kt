@@ -1,9 +1,9 @@
 package com.andrtw.nycfarmersmarkets.feature.map
 
+import com.andrtw.nycfarmersmarkets.core.testing.MainDispatcherRule
 import com.andrtw.nycfarmersmarkets.feature.map.fake.FakeFarmersMarketsRepository
 import com.andrtw.nycfarmersmarkets.feature.map.fake.fakeUiFarmersMarket
 import com.andrtw.nycfarmersmarkets.feature.map.model.MapScreenUiState
-import com.andrtw.nycfarmersmarkets.feature.map.util.MainDispatcherRule
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest

@@ -43,6 +43,8 @@ android {
 dependencies {
     implementation(project(":core-model"))
     implementation(project(":core-data"))
+    testImplementation(project(":core-testing"))
+    androidTestImplementation(project(":core-testing"))
 
     implementation(Deps.hiltAndroid)
     kapt(Deps.hiltCompiler)
@@ -56,13 +58,4 @@ dependencies {
 
     implementation(Deps.mapsCompose)
     implementation(Deps.gmsPlayServicesMaps)
-
-    testImplementation(Deps.junit4)
-    testImplementation(Deps.googleTruth)
-    testImplementation(Deps.kotlinxCoroutinesTest)
-    androidTestImplementation(Deps.androidxTestExt)
-    androidTestImplementation(Deps.androidxTestEspressoCore)
-    androidTestImplementation(Deps.androidxComposeUiTest)
-    debugImplementation(Deps.androidxComposeUiTooling)
-    debugImplementation(Deps.androidxComposeUiTestManifest)
 }

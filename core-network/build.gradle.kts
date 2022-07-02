@@ -36,6 +36,8 @@ android {
 }
 
 dependencies {
+    testImplementation(project(":core-testing"))
+
     implementation(Deps.hiltAndroid)
     kapt(Deps.hiltCompiler)
 
@@ -43,9 +45,5 @@ dependencies {
 
     implementation(Deps.retrofit)
     implementation(Deps.retrofitKotlinxSerializationConverter)
-
     implementation(Deps.kotlinxSerializationJson)
-
-    testImplementation(Deps.googleTruth)
-    testImplementation(Deps.junit4)
 }

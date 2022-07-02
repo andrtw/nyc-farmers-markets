@@ -43,6 +43,8 @@ android {
 dependencies {
     implementation(project(":core-model"))
     implementation(project(":core-data"))
+    testImplementation(project(":core-testing"))
+    androidTestImplementation(project(":core-testing"))
 
     implementation(Deps.hiltAndroid)
     kapt(Deps.hiltCompiler)
@@ -54,13 +56,4 @@ dependencies {
     implementation(Deps.androidxComposeUiToolingPreview)
     implementation(Deps.androidxLifecycleViewModelCompose)
     implementation(Deps.androidxHiltNavigationCompose)
-
-    testImplementation(Deps.junit4)
-    testImplementation(Deps.googleTruth)
-    testImplementation(Deps.kotlinxCoroutinesTest)
-    androidTestImplementation(Deps.androidxTestExt)
-    androidTestImplementation(Deps.androidxTestEspressoCore)
-    androidTestImplementation(Deps.androidxComposeUiTest)
-    debugImplementation(Deps.androidxComposeUiTooling)
-    debugImplementation(Deps.androidxComposeUiTestManifest)
 }
