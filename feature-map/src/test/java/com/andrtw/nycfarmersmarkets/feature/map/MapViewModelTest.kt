@@ -1,7 +1,7 @@
 package com.andrtw.nycfarmersmarkets.feature.map
 
+import com.andrtw.nycfarmersmarkets.core.data.testing.FakeFarmersMarketsRepository
 import com.andrtw.nycfarmersmarkets.core.testing.MainDispatcherRule
-import com.andrtw.nycfarmersmarkets.feature.map.fake.FakeFarmersMarketsRepository
 import com.andrtw.nycfarmersmarkets.feature.map.fake.fakeUiFarmersMarket
 import com.andrtw.nycfarmersmarkets.feature.map.model.MapScreenUiState
 import com.google.common.truth.Truth.assertThat

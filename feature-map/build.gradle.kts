@@ -44,6 +44,7 @@ dependencies {
     implementation(project(":core-model"))
     implementation(project(":core-data"))
     testImplementation(project(":core-testing"))
+    testImplementation(project(":core-data-testing"))
     androidTestImplementation(project(":core-testing"))
 
     implementation(Deps.hiltAndroid)

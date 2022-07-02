@@ -1,4 +1,4 @@
-package com.andrtw.nycfarmersmarkets.feature.map.fake
+package com.andrtw.nycfarmersmarkets.core.data.testing
 
 import com.andrtw.nycfarmersmarkets.core.data.repository.FarmersMarketsRepository
 import com.andrtw.nycfarmersmarkets.core.model.FarmersMarket
