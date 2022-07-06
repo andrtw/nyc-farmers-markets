@@ -1,7 +1,9 @@
 package com.andrtw.nycfarmersmarkets.feature.detail.mapper
 
 import com.andrtw.nycfarmersmarkets.core.model.FarmersMarket
+import com.andrtw.nycfarmersmarkets.feature.detail.R
 import com.andrtw.nycfarmersmarkets.feature.detail.model.UiMarketDetail
+import com.andrtw.nycfarmersmarkets.feature.detail.model.UiMarketFeature
 
 fun FarmersMarket.toUiModel() = UiMarketDetail(
     latitude = latitude,
@@ -12,8 +14,22 @@ fun FarmersMarket.toUiModel() = UiMarketDetail(
     daysOperation = daysOperation,
     hoursOperations = hoursOperations,
     seasonDates = seasonDates,
-    acceptsEbt = acceptsEbt,
-    openYearRound = openYearRound,
-    nycDeptOfHealthCooking = nycDeptOfHealthCooking,
-    kids = kids,
+    features = listOf(
+        UiMarketFeature(
+            featureName = R.string.market_feature_accepts_ebt,
+            hasFeature = acceptsEbt,
+        ),
+        UiMarketFeature(
+            featureName = R.string.market_feature_open_year_round,
+            hasFeature = openYearRound,
+        ),
+        UiMarketFeature(
+            featureName = R.string.market_feature_nyc_dept_of_health_cooking,
+            hasFeature = nycDeptOfHealthCooking,
+        ),
+        UiMarketFeature(
+            featureName = R.string.market_feature_kids,
+            hasFeature = kids,
+        ),
+    ),
 )

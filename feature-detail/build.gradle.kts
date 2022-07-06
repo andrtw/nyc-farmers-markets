@@ -57,4 +57,6 @@ dependencies {
     implementation(Deps.androidxComposeUiToolingPreview)
     implementation(Deps.androidxLifecycleViewModelCompose)
     implementation(Deps.androidxHiltNavigationCompose)
+    implementation(Deps.androidxComposeMaterial3WindowSizeClass)
+    implementation(Deps.accompanist)
 }

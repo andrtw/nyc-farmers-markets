@@ -10,7 +10,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Directions
+import androidx.compose.material.icons.filled.PinDrop
 import androidx.compose.material3.*
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -21,16 +24,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.andrtw.nycfarmersmarkets.feature.detail.model.DetailScreenUiState
 import com.andrtw.nycfarmersmarkets.feature.detail.model.UiMarketDetail
+import com.andrtw.nycfarmersmarkets.feature.detail.model.UiMarketFeature
 import com.andrtw.nycfarmersmarkets.feature.detail.util.DottedShape
+import com.google.accompanist.flowlayout.FlowRow
+import kotlin.math.floor
 
+@ExperimentalMaterial3Api
 @Composable
 fun DetailScreen(
     viewModel: DetailViewModel = hiltViewModel(),
     marketName: String,
+    windowSizeClass: WindowSizeClass,
+    onBackClick: () -> Unit,
 ) {
     val state by viewModel.uiState.collectAsState()
 
@@ -38,18 +48,59 @@ fun DetailScreen(
         viewModel.loadDetail(marketName)
     }
 
-    DetailScreen(state = state)
+    DetailScreen(
+        state = state,
+        onBackClick = onBackClick,
+        windowSizeClass = windowSizeClass,
+    )
 }
 
+@ExperimentalMaterial3Api
 @Composable
 fun DetailScreen(
     state: DetailScreenUiState,
+    onBackClick: () -> Unit,
+    windowSizeClass: WindowSizeClass,
 ) {
-    when (state) {
-        DetailScreenUiState.Loading -> LoadingIndicator()
-        is DetailScreenUiState.Error -> ErrorMessage(text = stringResource(id = state.errorMessage))
-        is DetailScreenUiState.Success -> MarketDetail(detail = state.marketDetail)
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = if (state is DetailScreenUiState.Success) state.marketDetail.marketName else "",
+                onCloseClick = onBackClick
+            )
+        }
+    ) { padding ->
+        Box(modifier = Modifier.padding(padding)) {
+            when (state) {
+                DetailScreenUiState.Loading -> LoadingIndicator()
+                is DetailScreenUiState.Error -> ErrorMessage(text = stringResource(id = state.errorMessage))
+                is DetailScreenUiState.Success -> MarketDetail(
+                    detail = state.marketDetail,
+                    windowSizeClass = windowSizeClass
+                )
+            }
+        }
     }
+}
+
+@Composable
+fun TopAppBar(
+    modifier: Modifier = Modifier,
+    title: String,
+    onCloseClick: () -> Unit,
+) {
+    SmallTopAppBar(
+        modifier = modifier,
+        title = { Text(title, fontWeight = FontWeight.Bold) },
+        navigationIcon = {
+            IconButton(onClick = onCloseClick) {
+                Icon(
+                    Icons.Default.Close,
+                    contentDescription = stringResource(id = R.string.close_content_description)
+                )
+            }
+        }
+    )
 }
 
 @Composable
@@ -64,72 +115,68 @@ fun LoadingIndicator(modifier: Modifier = Modifier) {
 
 @Composable
 fun MarketDetail(
+    windowSizeClass: WindowSizeClass,
     detail: UiMarketDetail,
+    modifier: Modifier = Modifier,
 ) {
     val scrollState = rememberScrollState()
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(16.dp)
             .verticalScroll(scrollState),
     ) {
-        Text(
-            detail.marketName,
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.Bold
-        )
-
         val address = buildString {
             detail.streetAddress?.let { append(it) }
             detail.borough?.let { append(", $it") }
         }
         if (address.isNotEmpty()) {
-            Text(text = address)
+            MarketAddress(address = address)
         }
 
         Spacer(modifier = Modifier.height(8.dp))
 
         detail.daysOperation?.let {
-            Spacer(modifier = Modifier.height(8.dp))
             MarketSection(
-                sectionName = "Days of operation",
-                sectionText = it,
-            )
+                modifier = Modifier.padding(top = 8.dp),
+                sectionName = stringResource(id = R.string.market_section_days_of_operation)
+            ) {
+                Text(it)
+            }
         }
         detail.hoursOperations?.let {
-            Spacer(modifier = Modifier.height(8.dp))
             MarketSection(
-                sectionName = "Hours of operation",
-                sectionText = it,
-            )
+                modifier = Modifier.padding(top = 8.dp),
+                sectionName = stringResource(id = R.string.market_section_hours_of_operation)
+            ) {
+                Text(it)
+            }
         }
         detail.seasonDates?.let {
-            Spacer(modifier = Modifier.height(8.dp))
             MarketSection(
-                sectionName = "Season dates",
-                sectionText = it,
-            )
+                modifier = Modifier.padding(top = 8.dp),
+                sectionName = stringResource(id = R.string.market_section_season_dates)
+            ) {
+                Text(it)
+            }
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        MarketHasFeature(
-            name = stringResource(id = R.string.market_feature_accepts_ebt),
-            available = detail.acceptsEbt
-        )
-        MarketHasFeature(
-            name = stringResource(id = R.string.market_feature_open_year_round),
-            available = detail.openYearRound
-        )
-        MarketHasFeature(
-            name = stringResource(id = R.string.market_feature_nyc_dept_of_health_cooking),
-            available = detail.nycDeptOfHealthCooking
-        )
-        MarketHasFeature(
-            name = stringResource(id = R.string.market_feature_kids),
-            available = detail.kids
-        )
+        MarketSection(
+            modifier = Modifier.padding(top = 8.dp),
+            sectionName = stringResource(id = R.string.market_section_features)
+        ) {
+            BoxWithConstraints {
+                FeaturesGrid(
+                    columnsCount = when (windowSizeClass.widthSizeClass) {
+                        WindowWidthSizeClass.Compact -> 1
+                        else -> floor(maxWidth / 300.dp).toInt().coerceIn(1..3)
+                    },
+                    width = maxWidth,
+                    features = detail.features,
+                )
+            }
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -143,43 +190,87 @@ fun MarketDetail(
 }
 
 @Composable
-fun ErrorMessage(text: String) {
-    Text(text = text)
+fun MarketAddress(
+    address: String,
+    modifier: Modifier = Modifier,
+) {
+    Row(modifier = modifier) {
+        Icon(
+            Icons.Default.PinDrop,
+            tint = MaterialTheme.colorScheme.primary,
+            contentDescription = null, // decorative image
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(text = address)
+    }
+}
+
+@Composable
+fun ErrorMessage(
+    text: String,
+    modifier: Modifier = Modifier,
+) {
+    Text(
+        modifier = modifier,
+        text = text,
+        color = MaterialTheme.colorScheme.error
+    )
 }
 
 @Composable
 fun MarketSection(
     sectionName: String,
-    sectionText: String,
     modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
 ) {
     Column(modifier = modifier) {
         Text(text = sectionName, style = MaterialTheme.typography.titleMedium)
-        Text(text = sectionText)
+        content()
     }
 }
 
 @Composable
-fun MarketHasFeature(
-    name: String,
-    available: Boolean,
+fun FeaturesGrid(
+    columnsCount: Int,
+    width: Dp,
+    features: List<UiMarketFeature>,
+    modifier: Modifier = Modifier,
+) {
+    val mainAxisSpacing = 16.dp
+    val featureWidth = (width / columnsCount) - mainAxisSpacing
+    FlowRow(
+        modifier = modifier,
+        mainAxisSpacing = mainAxisSpacing,
+    ) {
+        for (feature in features) {
+            MarketFeature(
+                featureName = stringResource(id = feature.featureName),
+                hasFeature = feature.hasFeature,
+                modifier = Modifier.width(featureWidth)
+            )
+        }
+    }
+}
+
+@Composable
+fun MarketFeature(
+    featureName: String,
+    hasFeature: Boolean,
     modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            text = name,
-        )
+        Text(text = featureName)
         Box(
             Modifier
                 .weight(1f)
                 .height(1.dp)
-                .padding(horizontal = 4.dp)
+                .padding(start = 4.dp)
                 .background(Color.Gray, shape = DottedShape(step = 6.dp))
         )
-        if (available) {
+        if (hasFeature) {
             Icon(
                 Icons.Default.Check,
                 tint = MaterialTheme.colorScheme.primary,

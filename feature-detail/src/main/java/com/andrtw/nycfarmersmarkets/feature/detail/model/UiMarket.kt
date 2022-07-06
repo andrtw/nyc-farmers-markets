@@ -1,5 +1,7 @@
 package com.andrtw.nycfarmersmarkets.feature.detail.model
 
+import androidx.annotation.StringRes
+
 data class UiMarketDetail(
     val latitude: Double,
     val longitude: Double,
@@ -9,8 +11,10 @@ data class UiMarketDetail(
     val daysOperation: String?,
     val hoursOperations: String?,
     val seasonDates: String?,
-    val acceptsEbt: Boolean,
-    val openYearRound: Boolean,
-    val nycDeptOfHealthCooking: Boolean,
-    val kids: Boolean,
+    val features: List<UiMarketFeature>,
+)
+
+data class UiMarketFeature(
+    @StringRes val featureName: Int,
+    val hasFeature: Boolean,
 )

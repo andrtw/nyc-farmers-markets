@@ -1,6 +1,7 @@
 import Versions as v
 
 object Deps {
+    const val accompanist =  "com.google.accompanist:accompanist-flowlayout:${v.accompanist}"
     const val androidxCoreKtx = "androidx.core:core-ktx:${v.androidxCore}"
     const val androidxActivityCompose = "androidx.activity:activity-compose:${v.androidxActivity}"
     const val androidxLifecycleViewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:${v.androidxLifecycle}"
@@ -12,7 +13,9 @@ object Deps {
     const val androidxComposeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview:${v.androidxCompose}"
     const val androidxComposeUiTest = "androidx.compose.ui:ui-test-junit4:${v.androidxCompose}"
     const val androidxComposeUiTestManifest = "androidx.compose.ui:ui-test-manifest:${v.androidxCompose}"
+    const val androidxNavigationCompose = "androidx.navigation:navigation-compose:${v.androidxNavigation}"
     const val androidxHiltNavigationCompose = "androidx.hilt:hilt-navigation-compose:${v.androidxHiltNavigationCompose}"
+    const val androidxComposeMaterial3WindowSizeClass = "androidx.compose.material3:material3-window-size-class:${v.androidxComposeMaterial3}"
     const val androidxTestCore = "androidx.test:core:${v.androidxTest}"
     const val androidxTestExt = "androidx.test.ext:junit-ktx:${v.androidxTestExt}"
     const val androidxTestEspressoCore = "androidx.test.espresso:espresso-core:${v.androidxEspresso}"
