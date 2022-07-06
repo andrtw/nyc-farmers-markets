@@ -4,6 +4,7 @@ import com.andrtw.nycfarmersmarkets.core.data.testing.FakeFarmersMarketsReposito
 import com.andrtw.nycfarmersmarkets.core.testing.MainDispatcherRule
 import com.andrtw.nycfarmersmarkets.feature.detail.model.DetailScreenUiState
 import com.andrtw.nycfarmersmarkets.feature.detail.model.UiMarketDetail
+import com.andrtw.nycfarmersmarkets.feature.detail.model.UiMarketFeature
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
@@ -60,10 +61,12 @@ class DetailViewModelTest {
                     daysOperation = "Mon-Fri",
                     hoursOperations = "8am-6pm",
                     seasonDates = "Mar-Sep",
-                    acceptsEbt = false,
-                    openYearRound = false,
-                    nycDeptOfHealthCooking = false,
-                    kids = false
+                    features = listOf(
+                        UiMarketFeature(R.string.market_feature_accepts_ebt, false),
+                        UiMarketFeature(R.string.market_feature_open_year_round, false),
+                        UiMarketFeature(R.string.market_feature_nyc_dept_of_health_cooking, false),
+                        UiMarketFeature(R.string.market_feature_kids, false),
+                    ),
                 )
             )
         )
