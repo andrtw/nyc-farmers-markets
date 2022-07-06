@@ -56,11 +56,17 @@ android {
 }
 
 dependencies {
+    implementation(project(":feature-map"))
+    implementation(project(":feature-detail"))
+
     implementation(Deps.androidxCoreKtx)
     implementation(Deps.androidxComposeUi)
     implementation(Deps.androidxComposeMaterial3)
     implementation(Deps.androidxComposeUiToolingPreview)
     implementation(Deps.androidxActivityCompose)
+    implementation(Deps.androidxNavigationCompose)
+    implementation(Deps.androidxHiltNavigationCompose)
+    implementation(Deps.androidxComposeMaterial3WindowSizeClass)
 
     implementation(Deps.hiltAndroid)
     kapt(Deps.hiltCompiler)

@@ -55,6 +55,7 @@ dependencies {
     implementation(Deps.androidxComposeMaterial3)
     implementation(Deps.androidxComposeUiToolingPreview)
     implementation(Deps.androidxLifecycleViewModelCompose)
+    implementation(Deps.androidxNavigationCompose)
     implementation(Deps.androidxHiltNavigationCompose)
 
     implementation(Deps.mapsCompose)
