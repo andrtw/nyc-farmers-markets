@@ -139,7 +139,7 @@ fun MarketDetail(
 
         detail.daysOperation?.let {
             MarketSection(
-                modifier = Modifier.padding(top = 8.dp),
+                modifier = Modifier.padding(top = 16.dp),
                 sectionName = stringResource(id = R.string.market_section_days_of_operation)
             ) {
                 Text(it)
@@ -147,7 +147,7 @@ fun MarketDetail(
         }
         detail.hoursOperations?.let {
             MarketSection(
-                modifier = Modifier.padding(top = 8.dp),
+                modifier = Modifier.padding(top = 16.dp),
                 sectionName = stringResource(id = R.string.market_section_hours_of_operation)
             ) {
                 Text(it)
@@ -155,7 +155,7 @@ fun MarketDetail(
         }
         detail.seasonDates?.let {
             MarketSection(
-                modifier = Modifier.padding(top = 8.dp),
+                modifier = Modifier.padding(top = 16.dp),
                 sectionName = stringResource(id = R.string.market_section_season_dates)
             ) {
                 Text(it)
@@ -163,7 +163,7 @@ fun MarketDetail(
         }
 
         MarketSection(
-            modifier = Modifier.padding(top = 8.dp),
+            modifier = Modifier.padding(top = 16.dp),
             sectionName = stringResource(id = R.string.market_section_features)
         ) {
             BoxWithConstraints {
@@ -224,7 +224,11 @@ fun MarketSection(
     content: @Composable () -> Unit,
 ) {
     Column(modifier = modifier) {
-        Text(text = sectionName, style = MaterialTheme.typography.titleMedium)
+        Text(
+            text = sectionName,
+            color = MaterialTheme.colorScheme.primary,
+            style = MaterialTheme.typography.titleMedium,
+        )
         content()
     }
 }
