@@ -1,22 +1,25 @@
 package com.andrtw.nycfarmersmarkets.feature.map
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -27,11 +30,9 @@ import com.andrtw.nycfarmersmarkets.feature.map.model.UiFarmersMarket
 import com.andrtw.nycfarmersmarkets.feature.map.util.TestTags
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.Marker
-import com.google.maps.android.compose.GoogleMap
-import com.google.maps.android.compose.MarkerInfoWindowContent
-import com.google.maps.android.compose.MarkerState
-import com.google.maps.android.compose.rememberCameraPositionState
+import com.google.maps.android.compose.*
 
 @ExperimentalMaterial3Api
 @Composable
@@ -70,26 +71,15 @@ fun MapScreen(
                 onErrorShown()
             }
         }
-        Box {
-            GoogleMap(
-                pins = state.pins,
-                onPinInfoClick = onPinInfoClick,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(padding),
-            )
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(12.dp),
-                contentAlignment = Alignment.CenterEnd,
-            ) {
-                RefreshButton(
-                    onClick = onRefreshMarketsClick,
-                    isLoading = state.isLoading,
-                )
-            }
-        }
+        GoogleMap(
+            pins = state.pins,
+            isLoadingMarkets = state.isLoading,
+            onPinInfoClick = onPinInfoClick,
+            onRefreshMarketsClick = onRefreshMarketsClick,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding),
+        )
     }
 }
 
@@ -132,60 +122,107 @@ fun RefreshButton(
     }
 }
 
+@ExperimentalMaterial3Api
 @Composable
 fun GoogleMap(
-    modifier: Modifier = Modifier,
     pins: List<UiFarmersMarket>,
+    isLoadingMarkets: Boolean,
     onPinInfoClick: (UiFarmersMarket) -> Unit,
+    onRefreshMarketsClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    darkModeEnabled: Boolean = true,
 ) {
+    val context = LocalContext.current
+    var isMapLoaded by rememberSaveable { mutableStateOf(false) }
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(NEW_YORK, ZOOM_LEVEL)
     }
+    val mapStyle = if (darkModeEnabled && isSystemInDarkTheme()) {
+        MapStyleOptions.loadRawResourceStyle(context, R.raw.map_style_dark)
+    } else {
+        null
+    }
 
-    GoogleMap(
-        modifier = modifier.fillMaxSize(),
-        cameraPositionState = cameraPositionState,
-    ) {
-        for (pin in pins) {
-            val position = LatLng(pin.latitude, pin.longitude)
-            MarkerInfoWindowContent(
-                state = MarkerState(position),
-                title = pin.marketName,
-                snippet = pin.streetAddress,
-                onInfoWindowClick = { onPinInfoClick(pin) },
-            ) { marker ->
-                InfoWindowContent(marker = marker)
+    Box(modifier = modifier.fillMaxSize()) {
+        GoogleMap(
+            cameraPositionState = cameraPositionState,
+            properties = MapProperties(
+                mapStyleOptions = mapStyle,
+            ),
+            onMapLoaded = {
+                isMapLoaded = true
+            }
+        ) {
+            for (pin in pins) {
+                val position = LatLng(pin.latitude, pin.longitude)
+                MarkerInfoWindow(
+                    state = rememberMarkerState(position = position),
+                    title = pin.marketName,
+                    snippet = pin.streetAddress,
+                    onInfoWindowClick = { onPinInfoClick(pin) },
+                ) { marker ->
+                    InfoWindowContent(marker = marker)
+                }
+            }
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            contentAlignment = Alignment.CenterEnd,
+        ) {
+            RefreshButton(
+                onClick = onRefreshMarketsClick,
+                isLoading = isLoadingMarkets,
+            )
+        }
+        if (!isMapLoaded) {
+            AnimatedVisibility(
+                modifier = Modifier
+                    .matchParentSize(),
+                visible = !isMapLoaded,
+                enter = EnterTransition.None,
+                exit = fadeOut()
+            ) {
+                CircularProgressIndicator(
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.background)
+                        .wrapContentSize()
+                )
             }
         }
     }
 }
 
+@ExperimentalMaterial3Api
 @Composable
 fun InfoWindowContent(
     marker: Marker,
     modifier: Modifier = Modifier,
 ) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            marker.title?.let {
-                Text(
-                    it,
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Bold
-                )
+    Card(modifier = modifier.wrapContentWidth()) {
+        Row(
+            modifier = Modifier.padding(8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                marker.title?.let {
+                    Text(
+                        it,
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                marker.snippet?.let {
+                    Text(it, style = MaterialTheme.typography.bodySmall)
+                }
             }
-            marker.snippet?.let {
-                Text(it, style = MaterialTheme.typography.bodySmall)
-            }
+            Spacer(modifier = Modifier.width(8.dp))
+            Icon(
+                Icons.Default.Info,
+                contentDescription = stringResource(id = R.string.market_info_content_description),
+            )
         }
-        Spacer(modifier = Modifier.width(8.dp))
-        Icon(
-            Icons.Default.Info,
-            contentDescription = stringResource(id = R.string.market_info_content_description),
-        )
     }
 }
 
