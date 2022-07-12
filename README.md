@@ -26,7 +26,7 @@ in the file `secrets.properties`.
 
 ## Modularization
 
-![Modularization graph](images/modularization-graph.png "Modularization graph")
+![Modularization graph](diagrams/images/modularization-graph.png "Modularization graph")
 
 There are two main types of modules:
 
