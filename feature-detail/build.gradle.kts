@@ -59,4 +59,5 @@ dependencies {
     implementation(Deps.androidxNavigationCompose)
     implementation(Deps.androidxHiltNavigationCompose)
     implementation(Deps.androidxComposeMaterial3WindowSizeClass)
+    implementation(Deps.accompanistFlowlayout)
 }

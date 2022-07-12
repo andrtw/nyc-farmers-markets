@@ -1,6 +1,7 @@
 import Versions as v
 
 object Deps {
+    const val accompanistFlowlayout = "com.google.accompanist:accompanist-flowlayout:${v.accompanist}"
     const val androidxActivityCompose = "androidx.activity:activity-compose:${v.androidxActivity}"
     const val androidxComposeMaterial3 = "androidx.compose.material3:material3:${v.androidxComposeMaterial3}"
     const val androidxComposeMaterial3WindowSizeClass = "androidx.compose.material3:material3-window-size-class:${v.androidxComposeMaterial3}"
