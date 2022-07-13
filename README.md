@@ -32,7 +32,7 @@ There are two main types of modules:
 
 * `core-*` modules contain common functionalities reusable by other modules, they can depend on other
 `core-*` modules
-* `features-*` modules contain the main functionalities of the app, they can depend on `core-*` modules
+* `feature-*` modules contain the main functionalities of the app, they can depend on `core-*` modules
 and should not depend on other `feature-*` modules
 
 The `app` module is the main module that connects all the other modules, it should depend on all the
