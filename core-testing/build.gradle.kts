@@ -38,6 +38,7 @@ dependencies {
     api(Deps.junit4)
     api(Deps.googleTruth)
     api(Deps.kotlinxCoroutinesTest)
+    api(Deps.robolectric)
     api(Deps.androidxTestCore)
     api(Deps.androidxTestExt)
     api(Deps.androidxTestEspressoCore)

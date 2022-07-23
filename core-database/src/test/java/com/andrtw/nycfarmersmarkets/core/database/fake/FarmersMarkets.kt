@@ -1,8 +1,8 @@
-package com.andrtw.nycfarmersmarkets.core.database.dao.fake
+package com.andrtw.nycfarmersmarkets.core.database.fake
 
 import com.andrtw.nycfarmersmarkets.core.database.entity.FarmersMarketEntity
 
-internal fun fakeFarmersMarket(
+internal fun fakeFarmersMarketEntity(
     name: String = "Test Market",
     daysOperation: String = "Mon-Fri",
 ) = FarmersMarketEntity(

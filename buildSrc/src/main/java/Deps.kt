@@ -34,6 +34,7 @@ object Deps {
     const val okhttp = "com.squareup.okhttp3:okhttp:${v.okhttp}"
     const val retrofit = "com.squareup.retrofit2:retrofit:${v.retrofit}"
     const val retrofitKotlinxSerializationConverter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${v.retrofitKotlinxSerializationConverter}"
+    const val robolectric = "org.robolectric:robolectric:${v.robolectric}"
     const val roomCompiler = "androidx.room:room-compiler:${v.room}"
     const val roomKtx = "androidx.room:room-ktx:${v.room}"
     const val roomRuntime = "androidx.room:room-runtime:${v.room}"

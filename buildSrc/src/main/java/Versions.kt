@@ -22,6 +22,7 @@ object Versions {
     const val okhttp = "4.10.0"
     const val retrofit = "2.9.0"
     const val retrofitKotlinxSerializationConverter = "0.8.0"
+    const val robolectric = "4.8.1"
     const val room = "2.4.2"
     const val secretsGradlePlugin = "2.0.1"
 }

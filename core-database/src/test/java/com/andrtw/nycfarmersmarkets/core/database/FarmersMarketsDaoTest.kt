@@ -1,18 +1,21 @@
-package com.andrtw.nycfarmersmarkets.core.database.dao
+package com.andrtw.nycfarmersmarkets.core.database
 
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import com.andrtw.nycfarmersmarkets.core.database.NycFarmersMarketsDatabase
-import com.andrtw.nycfarmersmarkets.core.database.dao.fake.fakeFarmersMarket
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.andrtw.nycfarmersmarkets.core.database.dao.FarmersMarketsDao
+import com.andrtw.nycfarmersmarkets.core.database.fake.fakeFarmersMarketEntity
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 
 @ExperimentalCoroutinesApi
+@RunWith(AndroidJUnit4::class)
 class FarmersMarketsDaoTest {
 
     private lateinit var db: NycFarmersMarketsDatabase
@@ -27,7 +30,7 @@ class FarmersMarketsDaoTest {
 
     @Test
     fun farmersMarketsDao_returns_market_by_name() = runTest {
-        val marketEntity = fakeFarmersMarket(name = "Test Market")
+        val marketEntity = fakeFarmersMarketEntity(name = "Test Market")
         dao.upsertFarmersMarkets(listOf(marketEntity))
 
         assertThat(
@@ -39,7 +42,7 @@ class FarmersMarketsDaoTest {
 
     @Test
     fun farmersMarketsDao_returns_null_for_non_existent_market() = runTest {
-        val marketEntity = fakeFarmersMarket(name = "Test Market")
+        val marketEntity = fakeFarmersMarketEntity(name = "Test Market")
         dao.upsertFarmersMarkets(listOf(marketEntity))
 
         assertThat(dao.getFarmersMarketByNameStream("Android Market").first()).isNull()
@@ -47,7 +50,7 @@ class FarmersMarketsDaoTest {
 
     @Test
     fun farmersMarketsDao_inserts_market() = runTest {
-        val marketEntity = fakeFarmersMarket()
+        val marketEntity = fakeFarmersMarketEntity()
         dao.upsertFarmersMarkets(listOf(marketEntity))
 
         assertThat(
@@ -59,10 +62,10 @@ class FarmersMarketsDaoTest {
 
     @Test
     fun farmersMarketsDao_updates_existing_market() = runTest {
-        val marketEntity = fakeFarmersMarket()
+        val marketEntity = fakeFarmersMarketEntity()
         dao.upsertFarmersMarkets(listOf(marketEntity))
 
-        val updatedMarketEntity = fakeFarmersMarket(daysOperation = "Mon, Tue")
+        val updatedMarketEntity = fakeFarmersMarketEntity(daysOperation = "Mon, Tue")
         dao.upsertFarmersMarkets(listOf(updatedMarketEntity))
 
         assertThat(
@@ -76,10 +79,10 @@ class FarmersMarketsDaoTest {
     fun farmersMarketsDao_deletes_markets_by_marketName() = runTest {
         dao.insertOrIgnoreFarmersMarkets(
             listOf(
-                fakeFarmersMarket("Test Market 1"),
-                fakeFarmersMarket("Test Market 2"),
-                fakeFarmersMarket("Test Market 3"),
-                fakeFarmersMarket("Test Market 4"),
+                fakeFarmersMarketEntity("Test Market 1"),
+                fakeFarmersMarketEntity("Test Market 2"),
+                fakeFarmersMarketEntity("Test Market 3"),
+                fakeFarmersMarketEntity("Test Market 4"),
             )
         )
         dao.deleteFarmersMarkets(
