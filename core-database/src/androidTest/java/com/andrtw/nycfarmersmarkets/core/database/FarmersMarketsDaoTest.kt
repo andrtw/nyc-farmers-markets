@@ -3,7 +3,6 @@ package com.andrtw.nycfarmersmarkets.core.database
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.andrtw.nycfarmersmarkets.core.database.dao.FarmersMarketsDao
 import com.andrtw.nycfarmersmarkets.core.database.fake.fakeFarmersMarketEntity
 import com.google.common.truth.Truth.assertThat
@@ -13,10 +12,8 @@ import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 
 @ExperimentalCoroutinesApi
-@RunWith(AndroidJUnit4::class)
 class FarmersMarketsDaoTest {
 
     private lateinit var db: NycFarmersMarketsDatabase

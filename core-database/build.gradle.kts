@@ -45,7 +45,7 @@ android {
 }
 
 dependencies {
-    testImplementation(project(":core-testing"))
+    androidTestImplementation(project(":core-testing"))
 
     implementation(Deps.hiltAndroid)
     kapt(Deps.hiltCompiler)
