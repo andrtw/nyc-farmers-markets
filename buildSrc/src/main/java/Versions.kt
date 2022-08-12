@@ -1,6 +1,6 @@
 object Versions {
     const val accompanist = "0.24.13-rc"
-    const val androidGradlePlugin = "7.2.1"
+    const val androidGradlePlugin = "7.2.2"
     const val androidxActivity = "1.4.0"
     const val androidxCompose = "1.2.0-rc02"
     const val androidxComposeMaterial3 = "1.0.0-alpha13"
