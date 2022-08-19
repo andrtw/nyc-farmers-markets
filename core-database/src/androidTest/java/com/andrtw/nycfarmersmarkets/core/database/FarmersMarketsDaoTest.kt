@@ -6,14 +6,12 @@ import androidx.test.core.app.ApplicationProvider
 import com.andrtw.nycfarmersmarkets.core.database.dao.FarmersMarketsDao
 import com.andrtw.nycfarmersmarkets.core.database.fake.fakeFarmersMarketEntity
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-@ExperimentalCoroutinesApi
 class FarmersMarketsDaoTest {
 
     private lateinit var db: NycFarmersMarketsDatabase

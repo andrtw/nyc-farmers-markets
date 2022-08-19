@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.andrtw.nycfarmersmarkets.feature.detail.model.DetailScreenUiState
 import com.andrtw.nycfarmersmarkets.feature.detail.model.UiMarketDetail
@@ -34,7 +35,7 @@ import com.andrtw.nycfarmersmarkets.feature.detail.util.DottedShape
 import com.google.accompanist.flowlayout.FlowRow
 import kotlin.math.floor
 
-@ExperimentalMaterial3Api
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun DetailScreen(
     viewModel: DetailViewModel = hiltViewModel(),
@@ -55,7 +56,7 @@ fun DetailScreen(
     )
 }
 
-@ExperimentalMaterial3Api
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
     state: DetailScreenUiState,

@@ -25,6 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.andrtw.nycfarmersmarkets.feature.map.model.MapScreenUiState
 import com.andrtw.nycfarmersmarkets.feature.map.model.UiFarmersMarket
@@ -35,7 +36,7 @@ import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.compose.*
 
-@ExperimentalMaterial3Api
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun MapScreen(
     viewModel: MapViewModel = hiltViewModel(),
@@ -53,7 +54,7 @@ fun MapScreen(
     )
 }
 
-@ExperimentalMaterial3Api
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MapScreen(
     state: MapScreenUiState,
@@ -123,7 +124,6 @@ fun RefreshButton(
     }
 }
 
-@ExperimentalMaterial3Api
 @Composable
 fun GoogleMap(
     pins: List<UiFarmersMarket>,
@@ -195,7 +195,7 @@ fun GoogleMap(
     }
 }
 
-@ExperimentalMaterial3Api
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InfoWindowContent(
     marker: Marker,

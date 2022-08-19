@@ -1,7 +1,6 @@
 package com.andrtw.nycfarmersmarkets
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
@@ -18,7 +17,6 @@ import com.andrtw.nycfarmersmarkets.feature.map.navigation.mapGraph
 import com.andrtw.nycfarmersmarkets.ui.theme.NycFarmersMarketsTheme
 import kotlinx.coroutines.launch
 
-@ExperimentalMaterial3Api
 @Composable
 fun NycFarmersMarketsApp(
     windowSizeClass: WindowSizeClass,

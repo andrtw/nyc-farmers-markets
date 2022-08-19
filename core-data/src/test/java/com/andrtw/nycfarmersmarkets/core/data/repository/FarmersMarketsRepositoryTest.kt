@@ -2,13 +2,11 @@ package com.andrtw.nycfarmersmarkets.core.data.repository
 
 import com.andrtw.nycfarmersmarkets.core.data.fake.*
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
-@ExperimentalCoroutinesApi
 class FarmersMarketsRepositoryTest {
 
     private lateinit var repository: FarmersMarketsRepository
