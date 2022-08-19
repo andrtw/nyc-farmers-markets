@@ -5,6 +5,7 @@ import com.andrtw.nycfarmersmarkets.core.testing.MainDispatcherRule
 import com.andrtw.nycfarmersmarkets.feature.detail.model.DetailScreenUiState
 import com.andrtw.nycfarmersmarkets.feature.detail.model.UiMarketDetail
 import com.andrtw.nycfarmersmarkets.feature.detail.model.UiMarketFeature
+import com.andrtw.nycfarmersmarkets.feature.detail.usecase.GetFarmersMarketsDetail
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Rule
@@ -15,13 +16,13 @@ class DetailViewModelTest {
     @get:Rule
     val dispatcherRule = MainDispatcherRule()
 
-    private lateinit var repository: FakeFarmersMarketsRepository
     private lateinit var viewModel: DetailViewModel
 
     @Before
     fun setUp() {
-        repository = FakeFarmersMarketsRepository()
-        viewModel = DetailViewModel(repository)
+        val repository = FakeFarmersMarketsRepository()
+        val useCase = GetFarmersMarketsDetail(repository)
+        viewModel = DetailViewModel(useCase)
     }
 
     @Test
@@ -54,8 +55,7 @@ class DetailViewModelTest {
                     latitude = 0.0,
                     longitude = 0.0,
                     marketName = "Test Farmers Market 1",
-                    streetAddress = "W. Test Avenue",
-                    borough = "Manhattan",
+                    fullAddress = "W. Test Avenue, Manhattan",
                     daysOperation = "Mon-Fri",
                     hoursOperations = "8am-6pm",
                     seasonDates = "Mar-Sep",
