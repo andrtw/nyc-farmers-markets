@@ -8,10 +8,7 @@ import com.andrtw.nycfarmersmarkets.feature.map.mapper.toUiModel
 import com.andrtw.nycfarmersmarkets.feature.map.model.MapScreenUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,22 +17,30 @@ class MapViewModel @Inject constructor(
     private val farmersMarketsRepository: FarmersMarketsRepository,
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(MapScreenUiState())
-    val uiState = _uiState.asStateFlow()
-
     private var refreshJob: Job? = null
 
-    init {
-        viewModelScope.launch {
-            farmersMarketsRepository.getFarmersMarkets()
-                .map { markets ->
-                    markets.map(FarmersMarket::toUiModel)
-                }
-                .collect { markets ->
-                    _uiState.update { it.copy(pins = markets) }
-                }
-        }
+    private val _loadingState: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
+    private val _errorMessageState: MutableStateFlow<Int?> = MutableStateFlow(null)
+
+    val uiState: StateFlow<MapScreenUiState> = combine(
+        farmersMarketsRepository.getFarmersMarkets(),
+        _loadingState,
+        _errorMessageState,
+    ) { markets, isLoading, errorMessage ->
+        MapScreenUiState(
+            pins = markets.map(FarmersMarket::toUiModel),
+            isLoading = isLoading,
+            errorMessage = errorMessage,
+        )
+    }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = MapScreenUiState()
+        )
+
+    init {
         refreshFarmersMarkets()
     }
 
@@ -43,17 +48,17 @@ class MapViewModel @Inject constructor(
         refreshJob?.cancel()
         refreshJob = viewModelScope.launch {
             try {
-                _uiState.update { it.copy(isLoading = true) }
+                _loadingState.value = true
                 farmersMarketsRepository.updateFarmersMarkets()
             } catch (e: Exception) {
-                _uiState.update { it.copy(errorMessage = R.string.refresh_error) }
+                _errorMessageState.value = R.string.refresh_error
             } finally {
-                _uiState.update { it.copy(isLoading = false) }
+                _loadingState.value = false
             }
         }
     }
 
     fun errorMessageShown() {
-        _uiState.update { it.copy(errorMessage = null) }
+        _errorMessageState.value = null
     }
 }
