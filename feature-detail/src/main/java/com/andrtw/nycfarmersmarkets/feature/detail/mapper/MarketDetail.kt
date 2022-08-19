@@ -9,8 +9,12 @@ fun FarmersMarket.toUiModel() = UiMarketDetail(
     latitude = latitude,
     longitude = longitude,
     marketName = marketName,
-    streetAddress = streetAddress,
-    borough = borough,
+    fullAddress = streetAddress?.let { address ->
+        buildString {
+            append(address)
+            borough?.let { append(", $it") }
+        }
+    },
     daysOperation = daysOperation,
     hoursOperations = hoursOperations,
     seasonDates = seasonDates,

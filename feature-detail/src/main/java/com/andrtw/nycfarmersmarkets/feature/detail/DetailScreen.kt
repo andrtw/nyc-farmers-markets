@@ -106,7 +106,7 @@ fun TopAppBar(
 @Composable
 fun LoadingIndicator(modifier: Modifier = Modifier) {
     Box(
-        modifier = modifier,
+        modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
     ) {
         CircularProgressIndicator()
@@ -127,12 +127,8 @@ fun MarketDetail(
             .padding(16.dp)
             .verticalScroll(scrollState),
     ) {
-        val address = buildString {
-            detail.streetAddress?.let { append(it) }
-            detail.borough?.let { append(", $it") }
-        }
-        if (address.isNotEmpty()) {
-            MarketAddress(address = address)
+        detail.fullAddress?.let {
+            MarketAddress(address = it)
         }
 
         Spacer(modifier = Modifier.height(8.dp))

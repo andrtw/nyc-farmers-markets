@@ -2,9 +2,8 @@ package com.andrtw.nycfarmersmarkets.feature.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.andrtw.nycfarmersmarkets.core.data.repository.FarmersMarketsRepository
-import com.andrtw.nycfarmersmarkets.feature.detail.mapper.toUiModel
 import com.andrtw.nycfarmersmarkets.feature.detail.model.DetailScreenUiState
+import com.andrtw.nycfarmersmarkets.feature.detail.usecase.GetFarmersMarketsDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val farmersMarketsRepository: FarmersMarketsRepository,
+    private val getFarmersMarketsDetail: GetFarmersMarketsDetail,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<DetailScreenUiState>(DetailScreenUiState.Loading)
@@ -22,12 +21,12 @@ class DetailViewModel @Inject constructor(
 
     fun loadDetail(marketName: String) {
         viewModelScope.launch {
-            farmersMarketsRepository.getFarmersMarketByName(marketName)
-                .map { market ->
-                    if (market == null) {
+            getFarmersMarketsDetail(marketName)
+                .map { detail ->
+                    if (detail == null) {
                         DetailScreenUiState.Error(errorMessage = R.string.error_unknown_market)
                     } else {
-                        DetailScreenUiState.Success(marketDetail = market.toUiModel())
+                        DetailScreenUiState.Success(detail)
                     }
                 }
                 .collect { state ->
