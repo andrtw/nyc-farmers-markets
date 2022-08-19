@@ -25,6 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.andrtw.nycfarmersmarkets.feature.map.model.MapScreenUiState
 import com.andrtw.nycfarmersmarkets.feature.map.model.UiFarmersMarket
 import com.andrtw.nycfarmersmarkets.feature.map.util.TestTags
@@ -41,7 +42,7 @@ fun MapScreen(
     snackbarHostState: SnackbarHostState,
     onPinInfoClick: (String) -> Unit,
 ) {
-    val state by viewModel.uiState.collectAsState()
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
 
     MapScreen(
         state = state,

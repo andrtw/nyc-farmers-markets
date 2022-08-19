@@ -3,6 +3,7 @@ import Versions as v
 object Deps {
     const val accompanistFlowlayout = "com.google.accompanist:accompanist-flowlayout:${v.accompanist}"
     const val androidxActivityCompose = "androidx.activity:activity-compose:${v.androidxActivity}"
+    const val androidxLifecycleRuntimeCompose = "androidx.lifecycle:lifecycle-runtime-compose:${v.androidxLifecycle}"
     const val androidxComposeMaterial3 = "androidx.compose.material3:material3:${v.androidxComposeMaterial3}"
     const val androidxComposeMaterial3WindowSizeClass = "androidx.compose.material3:material3-window-size-class:${v.androidxComposeMaterial3}"
     const val androidxComposeMaterialIconsExtended = "androidx.compose.material:material-icons-extended:${v.androidxCompose}"

@@ -7,7 +7,7 @@ object Versions {
     const val androidxCore = "1.8.0"
     const val androidxEspresso = "3.4.0"
     const val androidxHiltNavigationCompose = "1.0.0"
-    const val androidxLifecycle = "2.5.0-rc02"
+    const val androidxLifecycle = "2.6.0-alpha01"
     const val androidxNavigation = "2.4.2"
     const val androidxTest = "1.4.0"
     const val androidxTestExt = "1.1.3"

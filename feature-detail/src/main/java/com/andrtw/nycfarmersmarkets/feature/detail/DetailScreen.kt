@@ -16,7 +16,6 @@ import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.andrtw.nycfarmersmarkets.feature.detail.model.DetailScreenUiState
 import com.andrtw.nycfarmersmarkets.feature.detail.model.UiMarketDetail
 import com.andrtw.nycfarmersmarkets.feature.detail.model.UiMarketFeature
@@ -42,7 +42,7 @@ fun DetailScreen(
     windowSizeClass: WindowSizeClass,
     onBackClick: () -> Unit,
 ) {
-    val state by viewModel.uiState.collectAsState()
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(key1 = marketName) {
         viewModel.loadDetail(marketName)
