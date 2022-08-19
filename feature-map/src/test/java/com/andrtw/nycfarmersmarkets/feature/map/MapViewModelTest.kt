@@ -6,6 +6,9 @@ import com.andrtw.nycfarmersmarkets.feature.map.fake.fakeUiFarmersMarket
 import com.andrtw.nycfarmersmarkets.feature.map.model.MapScreenUiState
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
@@ -28,6 +31,8 @@ class MapViewModelTest {
 
     @Test
     fun `markets are refreshed initially`() = runTest {
+        val collectJob = launch(UnconfinedTestDispatcher()) { viewModel.uiState.collect() }
+
         assertThat(viewModel.uiState.value).isEqualTo(
             MapScreenUiState(
                 pins = listOf(
@@ -39,10 +44,14 @@ class MapViewModelTest {
                 errorMessage = null,
             )
         )
+
+        collectJob.cancel()
     }
 
     @Test
     fun `markets are updated, one market is added`() = runTest {
+        val collectJob = launch(UnconfinedTestDispatcher()) { viewModel.uiState.collect() }
+
         viewModel.refreshFarmersMarkets()
 
         assertThat(viewModel.uiState.value).isEqualTo(
@@ -57,10 +66,14 @@ class MapViewModelTest {
                 errorMessage = null,
             )
         )
+
+        collectJob.cancel()
     }
 
     @Test
-    fun `thrown exception results in error message`() {
+    fun `thrown exception results in error message`() = runTest {
+        val collectJob = launch(UnconfinedTestDispatcher()) { viewModel.uiState.collect() }
+
         repository.failUpdate = true
 
         viewModel.refreshFarmersMarkets()
@@ -76,6 +89,8 @@ class MapViewModelTest {
                 errorMessage = R.string.refresh_error,
             )
         )
+
+        collectJob.cancel()
     }
 
     @Test
