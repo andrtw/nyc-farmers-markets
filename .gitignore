@@ -1,5 +1,10 @@
 # Gradle
 .gradle
+
+# Generated files
+bin/
+gen/
+out/
 build/
 
 captures/
@@ -8,13 +13,14 @@ captures/
 /secrets.properties
 
 # IntelliJ .idea folder
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
 *.iml
+.idea/*
+!.idea/copyright
+# Keep the code styles.
+!/.idea/codeStyles
+/.idea/codeStyles/*
+!/.idea/codeStyles/Project.xml
+!/.idea/codeStyles/codeStyleConfig.xml
 
 # General
 .DS_Store
