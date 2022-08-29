@@ -17,7 +17,7 @@ The source of the data is [NYC Open Data - DOHMH Farmers Markets](https://data.c
 
 ## Dependencies management
 
-Dependencies and app configuration data are organized in the `buildSrc` directory.
+Dependencies are organized with Gradle Version Catalogs in `libs.versions.toml`.
 
 ## API keys
 

@@ -43,12 +43,12 @@ android {
 dependencies {
     testImplementation(project(":core-testing"))
 
-    implementation(Deps.hiltAndroid)
-    kapt(Deps.hiltCompiler)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
-    implementation(Deps.okhttp)
+    implementation(libs.okhttp)
 
-    implementation(Deps.retrofit)
-    implementation(Deps.retrofitKotlinxSerializationConverter)
-    implementation(Deps.kotlinxSerializationJson)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.kotlin.serialization)
+    implementation(libs.kotlinx.serialization.json)
 }

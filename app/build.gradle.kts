@@ -51,7 +51,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.androidxCompose
+        kotlinCompilerExtensionVersion = libs.versions.androidxComposeCompiler.get()
     }
     packagingOptions {
         resources {
@@ -64,22 +64,22 @@ dependencies {
     implementation(project(":feature-map"))
     implementation(project(":feature-detail"))
 
-    implementation(Deps.androidxCoreKtx)
-    implementation(Deps.androidxComposeUi)
-    implementation(Deps.androidxComposeMaterial3)
-    implementation(Deps.androidxComposeUiToolingPreview)
-    implementation(Deps.androidxActivityCompose)
-    implementation(Deps.androidxNavigationCompose)
-    implementation(Deps.androidxHiltNavigationCompose)
-    implementation(Deps.androidxComposeMaterial3WindowSizeClass)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui.toolingPreview)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.compose.material3.windowSizeClass)
 
-    implementation(Deps.hiltAndroid)
-    kapt(Deps.hiltCompiler)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
-    testImplementation(Deps.junit4)
-    androidTestImplementation(Deps.androidxTestExt)
-    androidTestImplementation(Deps.androidxTestEspressoCore)
-    androidTestImplementation(Deps.androidxComposeUiTest)
-    debugImplementation(Deps.androidxComposeUiTooling)
-    debugImplementation(Deps.androidxComposeUiTestManifest)
+    testImplementation(libs.junit4)
+    androidTestImplementation(libs.androidx.test.ext)
+    androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.androidx.compose.ui.test)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.testManifest)
 }

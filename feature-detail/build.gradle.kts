@@ -41,7 +41,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.androidxCompose
+        kotlinCompilerExtensionVersion = libs.versions.androidxComposeCompiler.get()
     }
 }
 
@@ -52,18 +52,18 @@ dependencies {
     testImplementation(project(":core-data-testing"))
     androidTestImplementation(project(":core-testing"))
 
-    implementation(Deps.hiltAndroid)
-    kapt(Deps.hiltCompiler)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
-    implementation(Deps.androidxCoreKtx)
-    implementation(Deps.androidxComposeUi)
-    implementation(Deps.androidxComposeMaterial3)
-    implementation(Deps.androidxComposeMaterialIconsExtended)
-    implementation(Deps.androidxComposeUiToolingPreview)
-    implementation(Deps.androidxLifecycleViewModelCompose)
-    implementation(Deps.androidxLifecycleRuntimeCompose)
-    implementation(Deps.androidxNavigationCompose)
-    implementation(Deps.androidxHiltNavigationCompose)
-    implementation(Deps.androidxComposeMaterial3WindowSizeClass)
-    implementation(Deps.accompanistFlowlayout)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.iconsExtended)
+    implementation(libs.androidx.compose.ui.toolingPreview)
+    implementation(libs.androidx.lifecycle.viewModel.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.compose.material3.windowSizeClass)
+    implementation(libs.accompanist.flowlayout)
 }

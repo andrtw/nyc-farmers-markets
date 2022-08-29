@@ -52,12 +52,12 @@ android {
 dependencies {
     androidTestImplementation(project(":core-testing"))
 
-    implementation(Deps.hiltAndroid)
-    kapt(Deps.hiltCompiler)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
-    implementation(Deps.roomRuntime)
-    implementation(Deps.roomKtx)
-    kapt(Deps.roomCompiler)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    kapt(libs.room.compiler)
 
-    implementation(Deps.kotlinxCoroutinesAndroid)
+    implementation(libs.kotlinx.coroutines.android)
 }

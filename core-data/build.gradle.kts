@@ -45,8 +45,8 @@ dependencies {
     implementation(project(":core-database"))
     testImplementation(project(":core-testing"))
 
-    implementation(Deps.hiltAndroid)
-    kapt(Deps.hiltCompiler)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
-    implementation(Deps.kotlinxCoroutinesAndroid)
+    implementation(libs.kotlinx.coroutines.android)
 }
