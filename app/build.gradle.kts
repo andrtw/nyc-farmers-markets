@@ -11,14 +11,14 @@ secrets {
 }
 
 android {
-    compileSdk = Config.compileSdk
+    compileSdk = 32
 
     defaultConfig {
         applicationId = "com.andrtw.nycfarmersmarkets"
-        minSdk = Config.minSdk
-        targetSdk = Config.targetSdk
-        versionCode = Config.versionCode
-        versionName = Config.versionName
+        minSdk = 21
+        targetSdk = 32
+        versionCode = 1
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
