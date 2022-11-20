@@ -17,6 +17,7 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -165,10 +166,7 @@ fun MarketDetail(
         ) {
             BoxWithConstraints {
                 FeaturesGrid(
-                    columnsCount = when (windowSizeClass.widthSizeClass) {
-                        WindowWidthSizeClass.Compact -> 1
-                        else -> floor(maxWidth / 300.dp).toInt().coerceIn(1..3)
-                    },
+                    columnsCount = rememberColumns(maxWidth, windowSizeClass),
                     width = maxWidth,
                     features = detail.features,
                 )
@@ -309,5 +307,16 @@ fun GoogleMapsButton(
         Icon(Icons.Default.Directions, contentDescription = null) // decorative image
         Spacer(modifier = Modifier.width(8.dp))
         Text(text = stringResource(R.string.google_maps_button))
+    }
+}
+
+@Composable
+fun rememberColumns(
+    width: Dp,
+    windowSizeClass: WindowSizeClass,
+) = remember(windowSizeClass) {
+    when (windowSizeClass.widthSizeClass) {
+        WindowWidthSizeClass.Compact -> 1
+        else -> floor(width / 300.dp).toInt().coerceIn(1..3)
     }
 }
