@@ -2,6 +2,10 @@ plugins {
     id("nycfarmersmarkets.android.library")
 }
 
+android {
+    namespace = "com.andrtw.nycfarmersmarkets.core.testing"
+}
+
 dependencies {
     implementation(project(":core-model"))
 

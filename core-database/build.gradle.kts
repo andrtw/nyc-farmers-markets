@@ -5,6 +5,8 @@ plugins {
 }
 
 android {
+    namespace = "com.andrtw.nycfarmersmarkets.core.database"
+
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 

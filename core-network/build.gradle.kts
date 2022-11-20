@@ -5,6 +5,10 @@ plugins {
     id("kotlinx-serialization")
 }
 
+android {
+    namespace = "com.andrtw.nycfarmersmarkets.core.network"
+}
+
 dependencies {
     testImplementation(project(":core-testing"))
 

@@ -11,6 +11,8 @@ secrets {
 }
 
 android {
+    namespace = "com.andrtw.nycfarmersmarkets"
+
     defaultConfig {
         applicationId = "com.andrtw.nycfarmersmarkets"
         versionCode = 1

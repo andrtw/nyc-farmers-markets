@@ -4,6 +4,10 @@ plugins {
     id("dagger.hilt.android.plugin")
 }
 
+android {
+    namespace = "com.andrtw.nycfarmersmarkets.core.data"
+}
+
 dependencies {
     implementation(project(":core-network"))
     implementation(project(":core-model"))
